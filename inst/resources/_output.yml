@@ -1,0 +1,27 @@
+bookdown::html_document2:
+  df_print: paged
+  toc: yes
+  toc_depth: 2
+  toc_float:
+    collapsed: false
+  number_sections: false
+  fig.caption: yes
+  dev: svg
+  fig.retina: 2
+  theme: flatly
+  highlight: tango
+  css: styles.css
+bookdown::pdf_document2:
+  df_print: paged
+  toc: yes
+  toc_depth: 2
+  fig.caption: yes
+  latex_engine: xelatex
+html_notebook:
+  fig.caption: yes
+  toc: yes
+  toc_depth: 2
+  fig.retina: 2
+  theme: flatly
+  highlight: tango
+  css: styles.css
