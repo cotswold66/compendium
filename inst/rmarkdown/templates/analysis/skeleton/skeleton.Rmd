@@ -1,0 +1,25 @@
+---
+title: "Title"
+author: "John Lord"
+date: "The Date"
+---
+
+```{r Options, include = FALSE}
+knitr::opts_chunk$set(echo=FALSE, fig.width = 8, fig.asp = .618)
+options(contrasts = c("contr.sum", "contr.poly"))
+```
+
+```{r Libraries, message=FALSE}
+library(dplyr)
+```
+
+# Introduction
+
+
+
+# Analysis
+
+
+
+# Conclusions
+
