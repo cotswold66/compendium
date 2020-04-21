@@ -2,13 +2,15 @@ vpath %.Rmd ./analysis
 vpath %.R ./data-raw
 vpath %.rda ./data
 vpath %.rds ./data-raw
+vpath %.csv ./data-raw
+vpath %.pdf ./output
 vpath %.html ./output
 
 
 ANALYSIS_SOURCE = $(wildcard ./analysis/*.Rmd)
 ANALYSIS_OUT = $(notdir $(ANALYSIS_SOURCE:%.Rmd=%.html))
 
-.PHONY: data analysis convert distclean
+.PHONY: data convert distclean
 
 all : $(ANALYSIS_OUT)
 
@@ -18,10 +20,19 @@ all : $(ANALYSIS_OUT)
 	output_dir = "./output"\
 	)'
 
-# example.html : example.rda
+%.pdf : %.Rmd
+	Rscript -e 'rmarkdown::render("$<",\
+	output_format = "bookdown::pdf_document2",\
+	output_dir = "./output"\
+	)'
 
 data %.rda : %.R
 	Rscript $<
+
+
+# example.html : example.rda
+
+# example.pdf : example.rda
 
 # example.rda : example.rds
 
@@ -30,7 +41,7 @@ convert :
 	Rscript ./data-raw/convert.R
 
 clean :
-	rm -f ./output/*.html
+	rm -f ./output/*.html ./output/*.pdf
 
 distclean : clean
 	rm -f ./data/*.rda
