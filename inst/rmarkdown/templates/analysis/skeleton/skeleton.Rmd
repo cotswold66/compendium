@@ -1,17 +1,35 @@
 ---
 title: "Title"
-author: "John Lord"
+subtitle: "Subtitle"
+author: "Author"
 date: "The Date"
 ---
 
-```{r Options, include = FALSE}
-knitr::opts_chunk$set(echo=FALSE, fig.width = 8, fig.asp = .618)
+\listoftables
+\listoffigures
+
+```{r options, include = FALSE}
+# Suppress code and warnings. Set default figure size, alignment and position. 
+# Ensure figures do not flost by default in Latex
+knitr::opts_chunk$set(echo=FALSE, warning=FALSE, message=FALSE, fig.width = 8, fig.asp = .618, fig.align = "center", fig.pos="H", out.extra='', out.width = '80%')
+
+# Set ANOVA options to perform calculations similar to SAS
 options(contrasts = c("contr.sum", "contr.poly"))
 ```
 
-```{r Libraries, message=FALSE}
-library(dplyr)
+```{r sources}
+# source("../R/packages.R")
+# source("../R/functions.R")
 ```
+
+```{r defaults}
+# Define constants here
+```
+
+```{r load}
+# load("../data/file.rda")
+```
+
 
 # Introduction
 
