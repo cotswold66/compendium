@@ -13,32 +13,36 @@ compendium <- function(path, ...) {
   dir.create(path, recursive = TRUE, showWarnings = FALSE)
 
   # create new package
-  usethis::create_package(
+  usethis::create_project(
     path = path,
     # fields = getOption("usethis.description"),
     rstudio = rstudioapi::isAvailable(),
-    open = interactive()
+#    open = interactive()
   )
 
   setwd(path)
 
+  ## Create directories
   dirs <- list("analysis", "data", "data-raw", "doc", "fig", "output")
   purrr::map(dirs, ~usethis::use_directory(.x))
 
-  invisible(file.copy(from = system.file("resources/styles.css",
-                                         package = "compendium",
-                                         mustWork = TRUE),
-                      to = "analysis/",
-                      recursive = TRUE))
-  invisible(file.copy(from = system.file("resources/_output.yml",
-                                         package = "compendium",
-                                         mustWork = TRUE),
-                      to = "analysis/",
-                      recursive = TRUE))
-  invisible(file.copy(from = system.file("resources/Makefile",
-                                         package = "compendium",
-                                         mustWork = TRUE),
-                      to = "./",
-                      recursive = TRUE))
+  ## Copy files
+  pkg <- "compendium"
+  files <- list(
+    c("styles.css", "analysis/"),
+    c("_output.yml", "analysis/"),
+    c("Makefile", "./"),
+    c("functions.R", "R/"),
+    c("packages.R", "R/")
+  )
+  invisible(
+    purrr::map(1:length(files), ~file.copy(
+      from = system.file(paste0("resources/", files[[.x]][1]),
+                         package = pkg,
+                         mustWork = TRUE),
+      to = files[[.x]][2],
+      recursive = TRUE
+    ))
+  )
 
 }
