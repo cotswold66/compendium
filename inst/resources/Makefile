@@ -5,12 +5,13 @@ vpath %.rds ./data-raw
 vpath %.csv ./data-raw
 vpath %.pdf ./output
 vpath %.html ./output
+vpath %.xlsx ./data-raw
 
 
 ANALYSIS_SOURCE = $(wildcard ./analysis/*.Rmd)
-ANALYSIS_OUT = $(notdir $(ANALYSIS_SOURCE:%.Rmd=%.html))
+ANALYSIS_OUT = $(notdir $(ANALYSIS_SOURCE:%.Rmd=%.pdf))
 
-.PHONY: data convert distclean
+.PHONY: convert clean distclean
 
 all : $(ANALYSIS_OUT)
 
@@ -26,7 +27,7 @@ all : $(ANALYSIS_OUT)
 	output_dir = "./output"\
 	)'
 
-data %.rda : %.R
+%.rda : %.R
 	Rscript $<
 
 
